@@ -18,7 +18,6 @@ def monitor_clipboard(stop_event, status_var):
             pyperclip.copy(cleaned_text)
             recent_value = cleaned_text
         time.sleep(0.5)
-    # status_var.set("Not Monitoring")
 
 class ClipboardMonitorApp:
     def __init__(self, root):
@@ -46,12 +45,12 @@ class ClipboardMonitorApp:
         if not self.is_monitoring:
             self.is_monitoring = True
             self.stop_event.clear()
-            self.monitor_thread = threading.Thread(target=monitor_clipboard, args=(self.stop_event, self.status_var))
+            self.monitor_thread = threading.Thread(target=monitor_clipboard, args=(self.stop_event, self.status_var)) # Create a new thread
             self.monitor_thread.start()
             self.start_button.config(state=tk.DISABLED)
             self.stop_button.config(state=tk.NORMAL)
             self.status_var.set("Monitoring")
-            messagebox.showinfo("Clipboard Monitor", "Started monitoring clipboard.")
+            print("Started monitoring clipboard.")
 
     def stop_monitoring(self):
         if self.is_monitoring:
@@ -61,7 +60,7 @@ class ClipboardMonitorApp:
             self.start_button.config(state=tk.NORMAL)
             self.stop_button.config(state=tk.DISABLED)
             self.status_var.set("Not Monitoring")
-            messagebox.showinfo("Clipboard Monitor", "Stopped monitoring clipboard.")
+            print("Stopped monitoring clipboard.")
 
 if __name__ == "__main__":
     root = tk.Tk()
