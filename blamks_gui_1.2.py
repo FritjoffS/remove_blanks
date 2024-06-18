@@ -12,7 +12,7 @@ def remove_blanks(text):
 def monitor_clipboard(stop_event, status_var):
     recent_value = ""
     while not stop_event.is_set():
-        clipboard_text = pyperclip.paste()
+        clipboard_text = pyperclip.paste() 
         if clipboard_text != recent_value:
             cleaned_text = remove_blanks(clipboard_text)
             pyperclip.copy(cleaned_text)
@@ -30,13 +30,13 @@ class ClipboardMonitorApp:
         self.status_var.set("Not Monitoring")
 
         self.start_button = tk.Button(root, text="Start Monitoring", command=self.start_monitoring)
-        self.start_button.pack(pady=10)
+        self.start_button.pack(pady=10, padx=20)
 
         self.stop_button = tk.Button(root, text="Stop Monitoring", command=self.stop_monitoring, state=tk.DISABLED)
-        self.stop_button.pack(pady=10)
+        self.stop_button.pack(pady=10, padx=20)
 
         self.status_label = tk.Label(root, textvariable=self.status_var)
-        self.status_label.pack(pady=10)
+        self.status_label.pack(pady=10, padx=20)
 
         # Set the window attribute to make it always on top
         self.root.wm_attributes("-topmost", True)
